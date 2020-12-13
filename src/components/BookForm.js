@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import { BookContext } from '../contexts/BookContext';
 
 const BookForm = () => {
-    const { addBooks } = useContext(BookContext);
+    const { dispatch } = useContext(BookContext);
     const [formValues, updateForm ] = useState({title: '', author: ''});
 
     const updateFormValues = (e, field) => {
@@ -15,7 +15,7 @@ const BookForm = () => {
         e.preventDefault();
         const { title, author } = formValues;
         if(!title && !author) return;
-        addBooks(title, author);
+       dispatch({type:'ADD_TODO', book: {title, author}});
         updateForm({title: '', author: ''});
     }
     return (
